@@ -26,7 +26,7 @@ curl --location --output open-pdf-sign.jar \
 Alternatively, open-pdf-sign is also available on [nix](https://github.com/NixOS/nixpkgs/tree/master/pkgs/tools/misc/open-pdf-sign),
 a wrapper is available on [npm](https://www.npmjs.com/package/open-pdf-sign), and alongside a installer for [nginx](https://github.com/open-pdf-sign/open-pdf-sign-configurator).
 
-Make sure that Java is installed in at least version 8.
+Make sure that Java is installed in at least version 11.
 
 ### Run
 
@@ -201,7 +201,7 @@ This way, you could also configure multiple (virtual) hosts.
 ### Requirements
 
 * [Maven](https://maven.apache.org/)
-* JDK 8
+* JDK 11
 
 ### Build
 
