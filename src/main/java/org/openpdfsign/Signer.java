@@ -249,11 +249,11 @@ public class Signer {
             compositeTSPSource.setTspSources(tspSources);
             if (params.getTSA().isEmpty()) {
                 Arrays.stream(Configuration.getInstance().getProperties().getStringArray("tsp_sources")).forEach(source -> {
-                    tspSources.put(source, this.buildTspSource(source, proxyConfig));
+                    tspSources.put(source, this.buildTspSource(source, proxyConfig, params.getTsaUsername(), params.getTsaPassword()));
                 });
             } else {
                 params.getTSA().stream().forEach(source -> {
-                    tspSources.put(source, this.buildTspSource(source, proxyConfig));
+                    tspSources.put(source, this.buildTspSource(source, proxyConfig, params.getTsaUsername(), params.getTsaPassword()));
                 });
             }
             service.setTspSource(compositeTSPSource);
@@ -286,9 +286,12 @@ public class Signer {
         }
     }
 
-    private OnlineTSPSource buildTspSource(String source, ProxyConfig proxyConfig) {
+    private OnlineTSPSource buildTspSource(String source, ProxyConfig proxyConfig, String TSAUsername, String TSAPassword) {
         TimestampDataLoader timestampDataLoader = new TimestampDataLoader();
         timestampDataLoader.setProxyConfig(proxyConfig);
+        if(!StringUtils.isEmpty(TSAUsername) && !StringUtils.isEmpty(TSAPassword)) {
+            timestampDataLoader.addAuthentication(null, -1, null, TSAUsername, TSAPassword.toCharArray());
+        }
         return new OnlineTSPSource(source, timestampDataLoader);
     }
 
