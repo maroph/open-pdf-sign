@@ -115,6 +115,10 @@ Options:
     use specific time stamping authority as source (if multiple given, will
     be used in given order as fallback)
     Default: []
+  --tsa-username
+    username for tsa server
+  --tsa-password
+    password for tsa server
   --version
     prints version of this program
   --width
