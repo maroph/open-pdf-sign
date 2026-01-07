@@ -10,7 +10,9 @@ import eu.europa.esig.dss.pades.SignatureImageParameters;
 import eu.europa.esig.dss.pades.signature.PAdESService;
 import eu.europa.esig.dss.pdf.pdfbox.PdfBoxNativeObjectFactory;
 import eu.europa.esig.dss.service.crl.OnlineCRLSource;
+import eu.europa.esig.dss.service.http.commons.HostConnection;
 import eu.europa.esig.dss.service.http.commons.TimestampDataLoader;
+import eu.europa.esig.dss.service.http.commons.UserCredentials;
 import eu.europa.esig.dss.service.http.proxy.ProxyConfig;
 import eu.europa.esig.dss.service.http.proxy.ProxyProperties;
 import eu.europa.esig.dss.service.ocsp.OnlineOCSPSource;
@@ -286,11 +288,11 @@ public class Signer {
         }
     }
 
-    private OnlineTSPSource buildTspSource(String source, ProxyConfig proxyConfig, String TSAUsername, String TSAPassword) {
+    private OnlineTSPSource buildTspSource(String source, ProxyConfig proxyConfig, String tsaUsername, String tsaPassword) {
         TimestampDataLoader timestampDataLoader = new TimestampDataLoader();
         timestampDataLoader.setProxyConfig(proxyConfig);
-        if(!StringUtils.isEmpty(TSAUsername) && !StringUtils.isEmpty(TSAPassword)) {
-            timestampDataLoader.addAuthentication(null, -1, null, TSAUsername, TSAPassword.toCharArray());
+        if (!StringUtils.isEmpty(tsaUsername) && !StringUtils.isEmpty(tsaPassword)) {
+            timestampDataLoader.addAuthentication(new HostConnection(), new UserCredentials(tsaUsername, tsaPassword.toCharArray()));
         }
         return new OnlineTSPSource(source, timestampDataLoader);
     }

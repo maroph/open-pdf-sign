@@ -77,11 +77,11 @@ public class SignatureParameters {
     @JsonProperty("tsa")
     private List<String> TSA = new LinkedList<>();
 
-    @Parameter(required = false, names={"--tsa-username"}, description = "username for tsa server")
+    @Parameter(required = false, names={"--tsa-username"}, description = "username for TSA server")
     @JsonProperty("tsa-username")
     private String tsaUsername;
 
-    @Parameter(required = false, names={"--tsa-password"}, description = "password for tsa server")
+    @Parameter(required = false, names={"--tsa-password"}, description = "password for TSA server")
     @JsonProperty("tsa-password")
     private String tsaPassword;
 
